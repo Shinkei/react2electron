@@ -14,12 +14,58 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "create-desktop-app": "build -lw --c.extraMetadata.main=build/electron.js",
+    "create-desktop-app-mac": "build -m --c.extraMetadata.main=build/electron.js"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",
     "electron": "^2.0.8",
     "electron-builder": "^20.28.3",
     "wait-on": "^3.0.1"
-  }
+  },
+  "build": {
+    "appId": "com.doge.mdt",
+    "productName": "React2Electron",
+    "copyright": "It's Free (cc)",
+    "files": [
+      "build/**/*",
+      "node_module/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "tar.gz"
+      ],
+      "icon": "build/icon.png",
+      "executableName": "React2Electron",
+      "maintainer": "Jorge Ramirez",
+      "synopsis": "This is a demo of a react application running on electron",
+      "desktop": {
+        "Name": "React2Electron",
+        "Comment": "This is a demo of a react application running on electron",
+        "Type": "Application",
+        "Icon": "build/icon.png",
+        "StartupNotify": "true",
+        "Categories": "Utilities"
+      }
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "build/icon.png"
+    }
+  },
+  "author": {
+    "name": "Jorge Ramirez",
+    "email": "micorreo@gmail.com"
+  },
+  "homepage": "./"
 }
